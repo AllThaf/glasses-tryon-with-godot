@@ -1,1 +1,1 @@
-# glasses-tryon-with-godot
+# Virtual glasses try-on with Python and Godot
