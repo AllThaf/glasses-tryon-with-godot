@@ -52,6 +52,7 @@ func _ready():
 	print("Target server: ", server_host, ":", server_port)
 
 func _on_quit_button_pressed():
+	disconnect_from_server()
 	get_tree().quit()
 
 func _process(delta):
