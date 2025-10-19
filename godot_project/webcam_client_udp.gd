@@ -10,7 +10,7 @@ extends Control
 @onready var data_rate_label: Label = $InfoPanel/DataRateLabel
 
 var udp_client: PacketPeerUDP
-var is_connected: bool = false
+var is_connect: bool = false
 var server_host: String = "127.0.0.1"
 var server_port: int = 8888
 
@@ -55,19 +55,19 @@ func _on_quit_button_pressed():
 	get_tree().quit()
 
 func _process(delta):
-	if is_connected:
+	if is_connect:
 		receive_packets()
 		cleanup_old_frames()
 		update_performance_metrics(delta)
 
 func _on_connect_button_pressed():
-	if is_connected:
+	if is_connect:
 		disconnect_from_server()
 	else:
 		connect_to_server()
 
 func connect_to_server():
-	if is_connected:
+	if is_connect:
 		print("⚠️  Already connected!")
 		return
 		
@@ -114,7 +114,7 @@ func connect_to_server():
 				return
 	
 	if confirmed:
-		is_connected = true
+		is_connect = true
 		update_status("Connected - Receiving video...")
 		connect_button.text = "Disconnect"
 		print("🎥 Ready to receive video streams!")
@@ -132,12 +132,12 @@ func connect_to_server():
 func disconnect_from_server():
 	print("🔌 Disconnecting from server...")
 	
-	if is_connected:
+	if is_connect:
 		# Kirim unregister message
 		var unregister_message = "UNREGISTER".to_utf8_buffer()
 		udp_client.put_packet(unregister_message)
 	
-	is_connected = false
+	is_connect = false
 	udp_client.close()
 	frame_buffers.clear()
 	
@@ -296,7 +296,7 @@ func update_performance_metrics(delta: float):
 	update_info_display()
 
 func update_info_display():
-	if is_connected:
+	if is_connect:
 		fps_label.text = "FPS: %.1f" % current_fps
 		data_rate_label.text = "Rate: %.1f KB/s" % current_data_rate
 		
@@ -315,6 +315,6 @@ func update_status(message: String):
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		if is_connected:
+		if is_connect:
 			disconnect_from_server()
 		get_tree().quit()
