@@ -78,8 +78,8 @@ class WebcamServerUDP:
             )
 
             # Gambar titik pusat mata untuk debugging
-            cv2.circle(frame, left_eye_center, 3, (0, 255, 255), -1)
-            cv2.circle(frame, right_eye_center, 3, (0, 255, 255), -1)
+            # cv2.circle(frame, left_eye_center, 3, (0, 255, 255), -1)
+            # cv2.circle(frame, right_eye_center, 3, (0, 255, 255), -1)
 
             # Hitung jarak antar mata
             eye_distance = np.sqrt(
@@ -87,15 +87,11 @@ class WebcamServerUDP:
                 + (right_eye_center[1] - left_eye_center[1]) ** 2
             )
 
-            print(f"📏 Jarak mata: {eye_distance:.2f} pixels")
-
-            # Skala kacamata berdasarkan jarak mata (dengan faktor 2.5 untuk ukuran yang pas)
+            # Skala kacamata berdasarkan jarak mata
             glasses_width = int(eye_distance * 2.5)
             glasses_height = int(
                 glasses_width * self.glasses_img.shape[0] / self.glasses_img.shape[1]
             )
-
-            print(f"🕶️  Ukuran kacamata: {glasses_width}x{glasses_height}")
 
             # Resize kacamata
             glasses_resized = cv2.resize(
@@ -103,7 +99,7 @@ class WebcamServerUDP:
             )
 
             # Hitung sudut rotasi berdasarkan posisi mata
-            angle = np.degrees(
+            angle = -np.degrees(
                 np.arctan2(
                     right_eye_center[1] - left_eye_center[1],
                     right_eye_center[0] - left_eye_center[0],
@@ -126,17 +122,13 @@ class WebcamServerUDP:
             # Posisi x: tengah-tengah antara kedua mata
             glasses_center_x = (left_eye_center[0] + right_eye_center[0]) // 2
             # Posisi y: sedikit di atas mata
-            glasses_center_y = (left_eye_center[1] + right_eye_center[1]) // 2 - int(
-                glasses_height * 0.1
-            )
+            glasses_center_y = (left_eye_center[1] + right_eye_center[1]) // 2
 
             # Hitung koordinat top-left untuk overlay
             x1 = glasses_center_x - glasses_width // 2
             y1 = glasses_center_y - glasses_height // 2
             x2 = x1 + glasses_width
             y2 = y1 + glasses_height
-
-            print(f"📍 Posisi kacamata: ({x1}, {y1}) -> ({x2}, {y2})")
 
             # Pastikan kacamata tidak keluar dari frame
             if x1 >= 0 and y1 >= 0 and x2 <= frame.shape[1] and y2 <= frame.shape[0]:
@@ -155,74 +147,76 @@ class WebcamServerUDP:
                     )
 
                 frame[y1:y2, x1:x2] = roi
-                print("✅ Kacamata berhasil diterapkan!")
-            else:
-                print(f"⚠️  Kacamata di luar frame bounds!")
 
         except Exception as e:
-            print(f"❌ Error dalam overlay_glasses: {e}")
-            import traceback
-
-            traceback.print_exc()
+            pass  # Silent error
 
         return frame
 
     def detect_and_apply_glasses(self, frame):
         """Deteksi wajah dan terapkan kacamata"""
         try:
-            # Konversi ke grayscale untuk deteksi
+            # Konversi ke grayscale
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-            # Deteksi wajah dengan parameter yang lebih sensitif
+            # Equalizer histogram untuk kontras lebih baik
+            gray = cv2.equalizeHist(gray)
+
+            # Deteksi wajah
             faces = self.face_cascade.detectMultiScale(
-                gray, scaleFactor=1.05, minNeighbors=3, minSize=(80, 80)
+                gray,
+                scaleFactor=1.1,
+                minNeighbors=4,
+                minSize=(80, 80),
+                flags=cv2.CASCADE_SCALE_IMAGE,
             )
 
-            # Debug: Tampilkan jumlah wajah yang terdeteksi
             if len(faces) > 0:
-                print(f"🎯 Terdeteksi {len(faces)} wajah")
+                print(f"🎯 {len(faces)} wajah | ", end="")
 
-            # Untuk setiap wajah yang terdeteksi
             for x, y, w, h in faces:
+                # cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-                # ROI wajah untuk deteksi mata
-                roi_gray = gray[y : y + h, x : x + w]
+                # ROI wajah untuk deteksi mata - fokus area mata (60% atas)
+                eye_region_height = int(h * 0.6)
+                roi_gray = gray[y : y + eye_region_height, x : x + w]
 
-                # Deteksi mata dalam ROI wajah dengan parameter lebih sensitif
+                # Deteksi mata dengan parameter LEBIH TOLERAN
                 eyes = self.eye_cascade.detectMultiScale(
-                    roi_gray, scaleFactor=1.05, minNeighbors=5, minSize=(15, 15)
+                    roi_gray,
+                    scaleFactor=1.1,  # Lebih stabil
+                    minNeighbors=3,  # LEBIH RENDAH = deteksi lebih banyak
+                    minSize=(20, 20),  # Ukuran minimum
+                    maxSize=(int(w * 0.5), int(h * 0.3)),  # Batasi max
                 )
 
-                print(f"👁️  Terdeteksi {len(eyes)} mata")
+                print(f"{len(eyes)} mata", end="")
 
                 # Sesuaikan koordinat mata relatif terhadap frame penuh
                 eyes_adjusted = [(x + ex, y + ey, ew, eh) for (ex, ey, ew, eh) in eyes]
 
-                # Gambar kotak mata untuk debugging
+                # Gambar kotak mata untuk debugging (bisa dikomentari)
                 # for ex, ey, ew, eh in eyes_adjusted:
                 #     cv2.rectangle(frame, (ex, ey), (ex + ew, ey + eh), (255, 0, 0), 2)
 
                 # Overlay kacamata
                 if len(eyes_adjusted) >= 2:
-                    print("🕶️  Menerapkan kacamata...")
+                    print(" ✅")
                     frame = self.overlay_glasses(frame, (x, y, w, h), eyes_adjusted)
                 else:
-                    # Tampilkan pesan jika mata tidak cukup terdeteksi
-                    cv2.putText(
-                        frame,
-                        "Need 2 eyes detected",
-                        (x, y + h + 20),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.5,
-                        (0, 0, 255),
-                        2,
-                    )
+                    print(f" ⚠️")
+                    # cv2.putText(
+                    #     frame,
+                    #     f"Eyes: {len(eyes_adjusted)}/2",
+                    #     (x, y + h + 20),
+                    #     cv2.FONT_HERSHEY_SIMPLEX,
+                    #     0.5,
+                    #     (0, 165, 255),
+                    #     2,
+                    # )
 
         except Exception as e:
-            print(f"❌ Error dalam detect_and_apply_glasses: {e}")
-            import traceback
-
-            traceback.print_exc()
+            print(f"❌ Error: {e}")
 
         return frame
 
@@ -362,12 +356,6 @@ class WebcamServerUDP:
 
                     # Kirim packet
                     self.server_socket.sendto(udp_packet, client_addr)
-
-                # Debug info untuk frame pertama setiap detik
-                if self.sequence_number % 30 == 1:
-                    print(
-                        f"📤 Sent frame {self.sequence_number}: {frame_size} bytes in {total_packets} packets to {len(self.clients)} clients"
-                    )
 
             except Exception as e:
                 print(f"❌ Error sending to {client_addr}: {e}")
