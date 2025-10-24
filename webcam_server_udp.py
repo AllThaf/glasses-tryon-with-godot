@@ -9,7 +9,12 @@ import os
 
 
 class WebcamServerUDP:
-    def __init__(self, host="localhost", port=8888, glasses_path="glasses.png"):
+    def __init__(
+        self,
+        host="localhost",
+        port=8888,
+        glasses_path="godot_project/Glasses/glasses2.png",
+    ):
         self.host = host
         self.port = port
         self.server_socket = None
@@ -171,14 +176,11 @@ class WebcamServerUDP:
                 flags=cv2.CASCADE_SCALE_IMAGE,
             )
 
-            if len(faces) > 0:
-                print(f"🎯 {len(faces)} wajah | ", end="")
-
             for x, y, w, h in faces:
                 # cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
                 # ROI wajah untuk deteksi mata - fokus area mata (60% atas)
-                eye_region_height = int(h * 0.6)
+                eye_region_height = int(h * 0.9)
                 roi_gray = gray[y : y + eye_region_height, x : x + w]
 
                 # Deteksi mata dengan parameter LEBIH TOLERAN
@@ -190,7 +192,7 @@ class WebcamServerUDP:
                     maxSize=(int(w * 0.5), int(h * 0.3)),  # Batasi max
                 )
 
-                print(f"{len(eyes)} mata", end="")
+                # print(f"{len(eyes)} mata", end="")
 
                 # Sesuaikan koordinat mata relatif terhadap frame penuh
                 eyes_adjusted = [(x + ex, y + ey, ew, eh) for (ex, ey, ew, eh) in eyes]
@@ -201,19 +203,7 @@ class WebcamServerUDP:
 
                 # Overlay kacamata
                 if len(eyes_adjusted) >= 2:
-                    print(" ✅")
                     frame = self.overlay_glasses(frame, (x, y, w, h), eyes_adjusted)
-                else:
-                    print(f" ⚠️")
-                    # cv2.putText(
-                    #     frame,
-                    #     f"Eyes: {len(eyes_adjusted)}/2",
-                    #     (x, y + h + 20),
-                    #     cv2.FONT_HERSHEY_SIMPLEX,
-                    #     0.5,
-                    #     (0, 165, 255),
-                    #     2,
-                    # )
 
         except Exception as e:
             print(f"❌ Error: {e}")
@@ -263,6 +253,15 @@ class WebcamServerUDP:
                 data, addr = self.server_socket.recvfrom(1024)
                 message = data.decode("utf-8")
 
+                if message.startswith("SET_GLASSES:"):
+                    # Client meminta server untuk mengganti gambar kacamata
+                    new_path = message.split("SET_GLASSES:", 1)[1].strip()
+                    print(new_path)
+                    if new_path:
+                        # Update path dan coba load
+                        self.glasses_path = new_path
+                        self.load_glasses_image()
+
                 if message == "REGISTER":
                     if self.cap is None or not self.cap.isOpened():
                         self.cap = cv2.VideoCapture(0)
@@ -304,9 +303,7 @@ class WebcamServerUDP:
                     print("❌ Error: Tidak dapat membaca frame dari webcam")
                     break
 
-                # ========== TERAPKAN DETEKSI WAJAH DAN KACAMATA ==========
                 frame = self.detect_and_apply_glasses(frame)
-                # =========================================================
 
                 # Encode frame ke JPEG dengan quality yang optimal
                 encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 50]
