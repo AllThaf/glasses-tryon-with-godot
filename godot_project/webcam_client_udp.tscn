@@ -79,7 +79,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ControlPanel" type="HBoxContainer" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -97,7 +98,7 @@ text = "Connect to Server"
 [node name="QuitButton" type="Button" parent="ControlPanel"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Quit"
+text = "Back"
 
 [node name="InfoPanel" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -117,31 +118,3 @@ text = "Resolution: --"
 [node name="DataRateLabel" type="Label" parent="InfoPanel"]
 layout_mode = 2
 text = "Rate: -- KB/s"
-
-[node name="PerformanceInfo" type="VBoxContainer" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 700.0
-offset_top = 100.0
-offset_right = 900.0
-offset_bottom = 180.0
-
-[node name="ProtocolLabel" type="Label" parent="PerformanceInfo"]
-modulate = Color(0.7, 1, 0.7, 1)
-layout_mode = 2
-text = "Protocol: UDP"
-
-[node name="AdvantageLabel1" type="Label" parent="PerformanceInfo"]
-modulate = Color(0.8, 0.8, 0.8, 1)
-layout_mode = 2
-text = "✓ Lower Latency"
-
-[node name="AdvantageLabel2" type="Label" parent="PerformanceInfo"]
-modulate = Color(0.8, 0.8, 0.8, 1)
-layout_mode = 2
-text = "✓ No Handshake"
-
-[node name="AdvantageLabel3" type="Label" parent="PerformanceInfo"]
-modulate = Color(0.8, 0.8, 0.8, 1)
-layout_mode = 2
-text = "✓ Real-time Streaming"
