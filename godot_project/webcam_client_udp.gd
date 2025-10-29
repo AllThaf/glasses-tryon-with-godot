@@ -304,14 +304,14 @@ func update_info_display():
 		# Tambahkan statistik packet
 		if frames_completed + frames_dropped > 0:
 			var drop_rate = float(frames_dropped) / float(frames_completed + frames_dropped) * 100.0
-			status_label.text = "Status: Connected - Packets: %d, Drop: %.1f%%" % [packets_received, drop_rate]
+			status_label.text = "Connected - Packets: %d, Drop: %.1f%%" % [packets_received, drop_rate]
 	else:
 		fps_label.text = "FPS: --"
 		resolution_label.text = "Resolution: --"
 		data_rate_label.text = "Rate: -- KB/s"
 
 func update_status(message: String):
-	status_label.text = "Status: " + message
+	status_label.text = message
 	print("🎮 Webcam Client: " + message)
 
 func _notification(what):

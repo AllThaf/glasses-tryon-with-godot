@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ISSAT"
-run/main_scene="uid://chbapnujwr0bg"
+run/main_scene="uid://8oqakfjvnguq"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
