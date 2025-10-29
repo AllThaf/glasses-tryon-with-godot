@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://chbapnujwr0bg"]
+[gd_scene load_steps=6 format=3 uid="uid://chbapnujwr0bg"]
 
 [ext_resource type="Script" uid="uid://c3mc1cotcmcle" path="res://webcam_client_udp.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://bhktf54ii153" path="res://backgorund/udp.png" id="2_fgx0g"]
+[ext_resource type="Texture2D" uid="uid://bu7gsu2xhfvci" path="res://background/udp.png" id="2_fgx0g"]
+[ext_resource type="FontFile" uid="uid://dop0grb5sunok" path="res://font/Nexa-Heavy.ttf" id="3_nmf0b"]
+[ext_resource type="FontFile" uid="uid://do7r5ymporf0i" path="res://font/CaviarDreams_BoldItalic.ttf" id="4_a8p0s"]
+[ext_resource type="FontFile" uid="uid://b4dlpmd5hjnmj" path="res://font/CaviarDreams_Bold.ttf" id="5_a8p0s"]
 
 [node name="WebcamClient" type="Control"]
 layout_mode = 3
@@ -24,33 +27,40 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -142.0
-offset_top = 61.0
-offset_right = 158.0
-offset_bottom = 91.0
+offset_left = -156.0
+offset_top = 45.0
+offset_right = 184.0
+offset_bottom = 116.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Webcam Streaming Client (UDP)"
+theme_override_fonts/font = ExtResource("3_nmf0b")
+theme_override_font_sizes/font_size = 26
+text = "Webcam Streaming Client 
+(UDP)"
 horizontal_alignment = 1
 
 [node name="StatusLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 39.0
-offset_top = 450.0
-offset_right = 589.0
-offset_bottom = 475.0
+offset_left = 922.0
+offset_top = 292.0
+offset_right = 1472.0
+offset_bottom = 320.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Status: Disconnected"
+theme_override_fonts/font = ExtResource("4_a8p0s")
+theme_override_font_sizes/font_size = 20
+text = " Disconnected"
 
 [node name="ServerInfo" type="Label" parent="."]
 modulate = Color(0.8, 0.8, 0.8, 1)
 layout_mode = 0
-offset_left = 923.0
-offset_top = 187.0
-offset_right = 1173.0
-offset_bottom = 212.0
+offset_left = 925.0
+offset_top = 205.0
+offset_right = 1175.0
+offset_bottom = 231.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Server: 127.0.0.1:8888 (UDP)"
+theme_override_fonts/font = ExtResource("5_a8p0s")
+theme_override_font_sizes/font_size = 20
+text = "127.0.0.1:8888 (UDP)"
 
 [node name="VideoContainer" type="Panel" parent="."]
 layout_mode = 0
@@ -111,22 +121,25 @@ text = "Back"
 
 [node name="InfoPanel" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 33.0
-offset_top = 140.0
-offset_right = 233.0
-offset_bottom = 240.0
+offset_left = 43.0
+offset_top = 238.0
+offset_right = 243.0
+offset_bottom = 338.0
 
 [node name="FPSLabel" type="Label" parent="InfoPanel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_a8p0s")
 text = "FPS: --"
 
 [node name="ResolutionLabel" type="Label" parent="InfoPanel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0018410678, 0.0018410682, 0.0018410678, 1)
+theme_override_fonts/font = ExtResource("5_a8p0s")
 text = "Resolution: --"
 
 [node name="DataRateLabel" type="Label" parent="InfoPanel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.011087579, 0.011087578, 0.01108758, 1)
+theme_override_fonts/font = ExtResource("5_a8p0s")
 text = "Rate: -- KB/s"
