@@ -77,7 +77,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_1ehe0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 text = "Kacamata 1"
 
-[node name="ButtonKacamata5" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
+[node name="ButtonKacamata2" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
@@ -91,7 +91,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 text = "Kacamata 2
 "
 
-[node name="ButtonKacamata6" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
+[node name="ButtonKacamata3" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
@@ -104,7 +104,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_1ehe0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 text = "Kacamata 3"
 
-[node name="ButtonKacamata7" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
+[node name="ButtonKacamata4" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
@@ -117,7 +117,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_1ehe0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 text = "Kacamata 4"
 
-[node name="ButtonKacamata8" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
+[node name="ButtonTentangKami" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
@@ -130,7 +130,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_1ehe0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 text = "Tentang Kami"
 
-[node name="ButtonKacamata9" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
+[node name="ButtonQuit" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
@@ -145,8 +145,8 @@ text = "Quit
 "
 
 [connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata1" to="." method="_on_button_kacamata_1_pressed"]
-[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata5" to="." method="_on_button_kacamata_2_pressed"]
-[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata6" to="." method="_on_button_kacamata_3_pressed"]
-[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata7" to="." method="_on_button_kacamata_4_pressed"]
-[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata8" to="." method="_on_button_tentang_kami_pressed"]
-[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata9" to="." method="_on_button_quit_pressed"]
+[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata2" to="." method="_on_button_kacamata_2_pressed"]
+[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata3" to="." method="_on_button_kacamata_3_pressed"]
+[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata4" to="." method="_on_button_kacamata_4_pressed"]
+[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonTentangKami" to="." method="_on_button_tentang_kami_pressed"]
+[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonQuit" to="." method="_on_button_quit_pressed"]
