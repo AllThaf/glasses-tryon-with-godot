@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ykoonoibfdmm"]
 
-[ext_resource type="Script" uid="uid://douryasluqq5r" path="res://tentang_kami.gd" id="1_g2b7l"]
+[ext_resource type="Script" uid="uid://douryasluqq5r" path="res://Scripts/tentang_kami.gd" id="1_g2b7l"]
 [ext_resource type="Texture2D" uid="uid://cxhr68bklykfl" path="res://background/tentang_kami.png" id="2_yktm6"]
 
 [node name="TentangKami" type="Control"]

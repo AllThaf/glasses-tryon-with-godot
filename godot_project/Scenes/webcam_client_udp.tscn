@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://chbapnujwr0bg"]
 
-[ext_resource type="Script" uid="uid://c3mc1cotcmcle" path="res://webcam_client_udp.gd" id="1"]
+[ext_resource type="Script" uid="uid://c3mc1cotcmcle" path="res://Scripts/webcam_client_udp.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bu7gsu2xhfvci" path="res://background/udp.png" id="2_fgx0g"]
 [ext_resource type="FontFile" uid="uid://dop0grb5sunok" path="res://font/Nexa-Heavy.ttf" id="3_nmf0b"]
 [ext_resource type="FontFile" uid="uid://do7r5ymporf0i" path="res://font/CaviarDreams_BoldItalic.ttf" id="4_a8p0s"]
@@ -15,22 +15,30 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 1153.0
-offset_bottom = 645.0
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="BoxContainer"]
+layout_mode = 2
 texture = ExtResource("2_fgx0g")
 expand_mode = 3
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -156.0
-offset_top = 45.0
-offset_right = 184.0
-offset_bottom = 116.0
+anchors_preset = -1
+anchor_left = 0.512
+anchor_top = 0.124000005
+anchor_right = 0.512
+anchor_bottom = 0.124000005
+offset_left = -169.82404
+offset_top = -35.352005
+offset_right = 170.17596
+offset_bottom = 35.647995
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_nmf0b")
@@ -40,11 +48,16 @@ text = "Webcam Streaming Client
 horizontal_alignment = 1
 
 [node name="StatusLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 922.0
-offset_top = 292.0
-offset_right = 1472.0
-offset_bottom = 320.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8880001
+anchor_top = 0.47200003
+anchor_right = 0.8880001
+anchor_bottom = 0.47200003
+offset_left = -100.976074
+offset_top = -13.856018
+offset_right = 449.02393
+offset_bottom = 14.143982
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_a8p0s")
 theme_override_font_sizes/font_size = 20
@@ -52,18 +65,24 @@ text = " Disconnected"
 
 [node name="ServerInfo" type="Label" parent="."]
 modulate = Color(0.8, 0.8, 0.8, 1)
-layout_mode = 0
-offset_left = 925.0
-offset_top = 205.0
-offset_right = 1175.0
-offset_bottom = 231.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9110001
+anchor_top = 0.33600003
+anchor_right = 0.9110001
+anchor_bottom = 0.33600003
+offset_left = -124.472046
+offset_top = -12.728012
+offset_right = 125.527954
+offset_bottom = 13.271988
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_a8p0s")
 theme_override_font_sizes/font_size = 20
 text = "127.0.0.1:8888 (UDP)"
 
 [node name="VideoContainer" type="Panel" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -120,11 +139,16 @@ size_flags_horizontal = 3
 text = "Back"
 
 [node name="InfoPanel" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 43.0
-offset_top = 238.0
-offset_right = 243.0
-offset_bottom = 338.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.124000005
+anchor_top = 0.446
+anchor_right = 0.124000005
+anchor_bottom = 0.446
+offset_left = -99.84801
+offset_top = -50.007996
+offset_right = 100.15199
+offset_bottom = 49.992004
 
 [node name="FPSLabel" type="Label" parent="InfoPanel"]
 layout_mode = 2
