@@ -1,7 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://cagjtvcclc8bw"]
+[gd_scene load_steps=7 format=3 uid="uid://cagjtvcclc8bw"]
 
 [ext_resource type="Script" uid="uid://8oqakfjvnguq" path="res://Scripts/main_menu.gd" id="1_48xlc"]
 [ext_resource type="Texture2D" uid="uid://c8lo7qwn1hsrk" path="res://background/menu.png" id="2_1ehe0"]
+[ext_resource type="FontFile" uid="uid://b4dlpmd5hjnmj" path="res://font/CaviarDreams_Bold.ttf" id="3_1ehe0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce3w2"]
+bg_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ehe0"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n45e2"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -33,47 +55,98 @@ anchor_left = 0.29000002
 anchor_top = 0.568
 anchor_right = 0.29000002
 anchor_bottom = 0.568
-offset_left = -139.85779
-offset_top = -122.064026
-offset_right = 140.14221
-offset_bottom = 170.93597
+offset_left = -117.08002
+offset_top = -120.064026
+offset_right = 99.91998
+offset_bottom = 178.93597
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 6
 alignment = 1
 
 [node name="ButtonKacamata1" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_fonts/font = ExtResource("3_1ehe0")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_ce3w2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1ehe0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 text = "Kacamata 1"
 
-[node name="ButtonKacamata2" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
+[node name="ButtonKacamata5" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Kacamata 2"
+theme_override_colors/font_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_fonts/font = ExtResource("3_1ehe0")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_ce3w2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1ehe0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
+text = "Kacamata 2
+"
 
-[node name="ButtonKacamata3" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
+[node name="ButtonKacamata6" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_fonts/font = ExtResource("3_1ehe0")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_ce3w2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1ehe0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 text = "Kacamata 3"
 
-[node name="ButtonKacamata4" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
+[node name="ButtonKacamata7" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_fonts/font = ExtResource("3_1ehe0")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_ce3w2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1ehe0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 text = "Kacamata 4"
 
-[node name="ButtonTentangKami" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
+[node name="ButtonKacamata8" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_fonts/font = ExtResource("3_1ehe0")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_ce3w2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1ehe0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
 text = "Tentang Kami"
 
-[node name="ButtonQuit" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
+[node name="ButtonKacamata9" type="Button" parent="BoxContainer/TextureRect/ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Quit"
+theme_override_colors/font_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_fonts/font = ExtResource("3_1ehe0")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_ce3w2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1ehe0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
+text = "Quit
+"
 
 [connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata1" to="." method="_on_button_kacamata_1_pressed"]
-[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata2" to="." method="_on_button_kacamata_2_pressed"]
-[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata3" to="." method="_on_button_kacamata_3_pressed"]
-[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata4" to="." method="_on_button_kacamata_4_pressed"]
-[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonTentangKami" to="." method="_on_button_tentang_kami_pressed"]
-[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonQuit" to="." method="_on_button_quit_pressed"]
+[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata5" to="." method="_on_button_kacamata_2_pressed"]
+[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata6" to="." method="_on_button_kacamata_3_pressed"]
+[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata7" to="." method="_on_button_kacamata_4_pressed"]
+[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata8" to="." method="_on_button_tentang_kami_pressed"]
+[connection signal="pressed" from="BoxContainer/TextureRect/ButtonContainer/ButtonKacamata9" to="." method="_on_button_quit_pressed"]

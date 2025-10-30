@@ -1,7 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://ykoonoibfdmm"]
+[gd_scene load_steps=7 format=3 uid="uid://ykoonoibfdmm"]
 
 [ext_resource type="Script" uid="uid://douryasluqq5r" path="res://Scripts/tentang_kami.gd" id="1_g2b7l"]
 [ext_resource type="Texture2D" uid="uid://cxhr68bklykfl" path="res://background/tentang_kami.png" id="2_yktm6"]
+[ext_resource type="FontFile" uid="uid://b4dlpmd5hjnmj" path="res://font/CaviarDreams_Bold.ttf" id="3_70goj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ligy1"]
+bg_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ge2a"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ulrpa"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [node name="TentangKami" type="Control"]
 layout_mode = 3
@@ -19,19 +41,28 @@ offset_bottom = 647.0
 texture = ExtResource("2_yktm6")
 expand_mode = 3
 
-[node name="ButtonBack" type="Button" parent="."]
+[node name="ButtonKacamata1" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -47.0
-offset_top = -69.0
-offset_right = 54.0
-offset_bottom = -35.0
+offset_left = -63.0
+offset_top = -76.0
+offset_right = 63.0
+offset_bottom = -28.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_vertical = 3
+theme_override_colors/font_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_fonts/font = ExtResource("3_70goj")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_ligy1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6ge2a")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ulrpa")
 text = "BACK"
 
-[connection signal="pressed" from="ButtonBack" to="." method="_on_button_back_pressed"]
+[connection signal="pressed" from="ButtonKacamata1" to="." method="_on_button_back_pressed"]

@@ -1,10 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://chbapnujwr0bg"]
+[gd_scene load_steps=9 format=3 uid="uid://chbapnujwr0bg"]
 
 [ext_resource type="Script" uid="uid://c3mc1cotcmcle" path="res://Scripts/webcam_client_udp.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bu7gsu2xhfvci" path="res://background/udp.png" id="2_fgx0g"]
 [ext_resource type="FontFile" uid="uid://dop0grb5sunok" path="res://font/Nexa-Heavy.ttf" id="3_nmf0b"]
 [ext_resource type="FontFile" uid="uid://do7r5ymporf0i" path="res://font/CaviarDreams_BoldItalic.ttf" id="4_a8p0s"]
 [ext_resource type="FontFile" uid="uid://b4dlpmd5hjnmj" path="res://font/CaviarDreams_Bold.ttf" id="5_a8p0s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8fan"]
+bg_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3vic"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qr7wo"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [node name="WebcamClient" type="Control"]
 layout_mode = 3
@@ -91,6 +112,8 @@ offset_left = -320.0
 offset_top = -200.0
 offset_right = 320.0
 offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="VideoContainer"]
 layout_mode = 1
@@ -121,22 +144,39 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -120.0
-offset_top = -70.0
-offset_right = 120.0
+offset_left = -126.0
+offset_top = -88.0
+offset_right = 164.0
 offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/separation = 10
 
 [node name="ConnectButton" type="Button" parent="ControlPanel"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_fonts/font = ExtResource("5_a8p0s")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_c8fan")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n3vic")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qr7wo")
 text = "Connect to Server"
 
 [node name="QuitButton" type="Button" parent="ControlPanel"]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "Back"
+size_flags_vertical = 3
+theme_override_colors/font_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.21176471, 0.13725491, 0.07058824, 1)
+theme_override_fonts/font = ExtResource("5_a8p0s")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_c8fan")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n3vic")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qr7wo")
+text = "QUIT"
 
 [node name="InfoPanel" type="VBoxContainer" parent="."]
 layout_mode = 1
