@@ -1,3 +1,9 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+.background/*.png.import
+.font/*.ttf.import
+.Glasses/*.png.import
+
+.icon.svg.import
