@@ -1,207 +1,62 @@
-# Webcam Streaming: TCP vs UDP Comparison
+# Proyek Uji Coba Kacamata (*Glasses Try-On*): Implementasi Streaming Webcam Real-Time (UDP)
 
-Proyek ini mendemonstrasikan perbedaan antara TCP dan UDP untuk streaming video real-time dari webcam.
+Proyek ini menghadirkan aplikasi uji coba kacamata virtual *real-time* dengan memanfaatkan protokol **UDP (User Datagram Protocol)** untuk transmisi video berkecepatan tinggi, diimplementasikan menggunakan **Python (OpenCV)** sebagai *server* dan **Godot Engine** sebagai *client*.
 
-## 📁 File Structure
+## 📁 Struktur File
 
 ```
-├── webcam_server.py        # Server TCP (original)
-├── webcam_server_udp.py    # Server UDP (improved)
-├── test_connection.py      # Test TCP connection
-├── compare_protocols.py    # Protocol comparison tool
-└── godot_project/
-    ├── webcam_client.gd    # Client TCP (original)
-    ├── webcam_client.tscn  # Scene TCP
-    ├── webcam_client_udp.gd    # Client UDP (improved)
-    └── webcam_client_udp.tscn  # Scene UDP
+├── webcam_server_udp.py    # Server Python: Streaming webcam + deteksi wajah & try-on kacamata.
+├── godot_project/
+│   ├── Scenes/
+│   │   ├── main_menu.tscn      # Menu utama untuk memilih kacamata.
+│   │   └── webcam_client_udp.tscn # Scene klien UDP utama untuk menampilkan video.
+│   ├── Scripts/
+│   │   ├── main_menu.gd        # Logika Godot: Mengirim pilihan kacamata ke server via UDP.
+│   │   └── webcam_client_udp.gd # Logika Godot: Menerima, menyusun ulang paket, dan menampilkan video.
+│   └── Glasses/
+│       ├── glasses1.png, glasses2.png, ... # Aset gambar kacamata.
+└── README.md
 ```
 
-## 🚀 Quick Start
+-----
 
-### UDP Version (Recommended for streaming)
-1. **Start UDP Server:**
-   ```bash
-   python webcam_server_udp.py
-   ```
+## 🚀 Panduan Memulai Cepat
 
-2. **Run UDP Client:**
-   - Open Godot
-   - Load `webcam_client_udp.tscn`
-   - Press F6 or click Play Scene
+### 1\. Memulai Server (Python)
 
-### TCP Version (For comparison)
-1. **Start TCP Server:**
-   ```bash
-   python webcam_server.py
-   ```
+*Server* ini menggunakan Python dan *library* **OpenCV** untuk mengakses *webcam*, mendeteksi wajah, dan memproses *overlay* kacamata.
 
-2. **Run TCP Client:**
-   - Open Godot
-   - Load `webcam_client.tscn`
-   - Press F6 or click Play Scene
-
-## 📊 Protocol Comparison
-
-| Aspect | TCP | UDP |
-|--------|-----|-----|
-| **Connection** | Connection-oriented | Connectionless |
-| **Handshake** | 3-way handshake required | No handshake |
-| **Reliability** | Guaranteed delivery | Best effort |
-| **Speed** | Slower (overhead) | Faster (minimal overhead) |
-| **Latency** | Higher | **Lower** |
-| **Packet Loss** | Automatic retransmission | No retransmission |
-| **Real-time** | Not ideal | **Excellent** |
-
-## ✅ Why UDP is Better for Video Streaming
-
-### 1. **No Handshake Overhead**
-```
-TCP: SYN → SYN-ACK → ACK (3 steps before data)
-UDP: Data immediately sent (0 steps)
-```
-
-### 2. **Lower Latency**
-- **TCP**: Waits for acknowledgments before sending next data
-- **UDP**: Sends data continuously without waiting
-
-### 3. **Real-time Performance**
-- **TCP**: Retransmits lost packets (causes delays)
-- **UDP**: Skips lost packets (maintains real-time flow)
-
-### 4. **Bandwidth Efficiency**
-- **TCP**: ~20% overhead for headers and acknowledgments
-- **UDP**: ~3% overhead for minimal headers
-
-## 🔧 Technical Implementation
-
-### UDP Server Features
-```python
-# Key improvements in webcam_server_udp.py:
-✓ Packet fragmentation for large frames
-✓ Sequence numbering for frame ordering
-✓ No connection management overhead
-✓ Broadcast capability to multiple clients
-✓ Automatic client registration/deregistration
-```
-
-### UDP Client Features
-```gdscript
-# Key improvements in webcam_client_udp.gd:
-✓ Packet reassembly and ordering
-✓ Frame timeout handling
-✓ Duplicate packet detection
-✓ Performance statistics (FPS, drop rate)
-✓ Automatic connection recovery
-```
-
-## 📈 Expected Performance Improvements
-
-### Latency Comparison
-| Metric | TCP | UDP | Improvement |
-|--------|-----|-----|-------------|
-| **Connection Time** | 100-300ms | <10ms | **90% faster** |
-| **Frame Latency** | 50-200ms | 10-30ms | **75% faster** |
-| **Throughput** | Variable | Stable | **More consistent** |
-
-### Real-world Benefits
-- **Smoother video playback**
-- **Reduced buffering**
-- **Better responsiveness**
-- **Lower CPU usage**
-
-## 🎯 Use Cases
-
-### ✅ UDP is Perfect for:
-- Live webcam streaming
-- Video conferencing
-- Gaming (real-time data)
-- IoT sensor data
-- Live sports broadcasts
-
-### ❌ TCP is Better for:
-- File downloads
-- Web browsing
-- Email
-- Database transactions
-- Banking applications
-
-## 🔍 Testing and Comparison
-
-### Run Protocol Comparison:
 ```bash
-python compare_protocols.py
+python webcam_server_udp.py
 ```
 
-### Test Connection:
-```bash
-python test_connection.py
-```
+Setelah dijalankan, *server* akan beroperasi pada `127.0.0.1:8888` dan siap menerima koneksi *client* UDP.
 
-### Performance Monitoring
-Both clients show real-time statistics:
-- **FPS**: Frames per second
-- **Data Rate**: KB/s transfer rate
-- **Drop Rate**: Percentage of lost packets (UDP only)
-- **Resolution**: Current video resolution
+### 2\. Menjalankan Klien (Godot Engine)
 
-## 🛠️ Configuration
+1.  Buka proyek `godot_project/` di Godot Engine.
+2.  Jalankan *scene* utama (`main_menu.tscn`).
+3.  Pilih salah satu tombol **"Kacamata X"**.
+      * Pemilihan kacamata akan mengirimkan pesan `SET_GLASSES:` melalui UDP ke *server* untuk mengubah kacamata yang di-*overlay* secara *real-time*.
+4.  Di *scene* klien UDP, tekan **"Connect to Server"**.
+      * *Client* akan mengirim pesan `REGISTER` ke *server* dan mulai menerima *stream* video.
 
-### Server Configuration
-```python
-# In webcam_server_udp.py
-host = 'localhost'      # Server IP
-port = 8888            # Server port
-max_packet_size = 60000 # Max UDP packet size
-frame_quality = 50      # JPEG quality (1-100)
-```
+-----
 
-### Client Configuration
-```gdscript
-# In webcam_client_udp.gd
-server_host = "127.0.0.1"
-server_port = 8888
-frame_timeout = 1.0     # Frame assembly timeout
-```
+## ⚙️ Fitur dan Implementasi Teknis UDP
 
-## 🚨 Troubleshooting
+Proyek ini mengimplementasikan *real-time streaming* video menggunakan UDP karena protokol ini menawarkan **latensi rendah** dan sangat cocok untuk transmisi data yang memprioritaskan kecepatan dibandingkan keandalan mutlak.
 
-### Common UDP Issues:
-1. **Firewall blocking UDP**: Add firewall exception
-2. **Packet loss on WiFi**: Use wired connection
-3. **Buffer overflow**: Reduce video quality
-4. **Port conflicts**: Change port number
+### Server UDP (`webcam_server_udp.py`)
 
-### Performance Tuning:
-```python
-# Optimize for your network
-max_packet_size = 60000     # Reduce if packet loss
-frame_quality = 30-70       # Balance quality vs speed
-frame_rate = 30             # Adjust based on network
-```
+  * **Deteksi Wajah dan Mata:** Menggunakan model **Haar Cascades** dari OpenCV (`haarcascade_frontalface_default.xml` dan `haarcascade_eye.xml`) untuk mengidentifikasi area wajah dan mata.
+  * **Overlay Kacamata *Real-time*:** Menghitung skala dan rotasi kacamata berdasarkan posisi mata untuk menghasilkan *overlay* yang akurat.
+  * **Fragmentasi Paket (Packet Fragmentation):** Frame video di-*encode* ke JPEG (kualitas 50) dan dipecah menjadi fragmen-fragmen dengan ukuran maksimum `60000 bytes` untuk mematuhi batas paket UDP, memungkinkan transmisi *frame* berukuran besar.
+  * **Pengiriman Fragmen Serial:** Setiap paket dikirim dengan *header* **12 *byte*** yang berisi **nomor urut *frame***, **jumlah total paket**, dan **indeks paket** (`!III`), yang penting untuk rekonstruksi *frame* yang benar di sisi *client*.
 
-## 📚 Learning Resources
+### Klien UDP (`webcam_client_udp.gd`)
 
-### Understanding UDP vs TCP:
-- [RFC 768 - UDP Specification](https://tools.ietf.org/html/rfc768)
-- [RFC 793 - TCP Specification](https://tools.ietf.org/html/rfc793)
-- [Video Streaming Protocols](https://developer.mozilla.org/en-US/docs/Web/Guide/Audio_and_video_delivery)
-
-### Real-time Streaming:
-- [RTP (Real-time Transport Protocol)](https://tools.ietf.org/html/rfc3550)
-- [WebRTC for Browser Streaming](https://webrtc.org/)
-- [RTMP vs UDP Comparison](https://stream.md/streaming-protocols-explained)
-
-## 🏆 Conclusion
-
-**UDP adalah pilihan yang tepat untuk video streaming real-time** karena:
-
-1. **Latency rendah** - Tidak ada handshake dan acknowledgment
-2. **Performa real-time** - Frame yang hilang diabaikan, bukan ditunda
-3. **Efisiensi bandwidth** - Overhead minimal
-4. **Skalabilitas** - Mudah broadcast ke multiple clients
-
-Meskipun TCP lebih reliable, untuk aplikasi streaming video yang memprioritaskan real-time performance, **UDP adalah solusi yang superior**.
-
----
-
-**Happy Streaming! 🎥✨**
+  * ***Frame Reassembly***: Menerima fragmen-fragmen UDP, menyimpannya dalam *buffer* (`frame_buffers`), dan menyusunnya kembali menjadi satu *frame* video lengkap berdasarkan nomor urut.
+  * **Penanganan *Frame Timeout***: *Frame* yang tidak lengkap (*missing packets*) akan dihapus dari *buffer* setelah *timeout* **1,0 detik** untuk menjaga *client* tetap sinkron dengan *stream* *real-time*.
+  * **Pemantauan Performa:** Menampilkan metrik utama *real-time*, termasuk **FPS (Frame per Second)**, **Data Rate (KB/s)**, dan **Drop Rate (persentase *frame* yang hilang)**.
+  * **Proses *Client***: Proses penerimaan paket, penyusunan *frame*  , dan pembersihan *frame* lama dilakukan di dalam fungsi `_process(delta)` Godot.
