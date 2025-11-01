@@ -2,8 +2,8 @@
 .godot/
 /android/
 
-.backgrounds/*.png.import
-.fonts/*.ttf.import
-.glasses/*.png.import
+.background/*.png.import
+.font/*.ttf.import
+.Glasses/*.png.import
 
-icon.svg.import
+.icon.svg.import
