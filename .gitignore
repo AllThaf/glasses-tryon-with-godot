@@ -1,6 +1,10 @@
 # Godot 4+ specific ignores
 .godot/
 .nomedia
+.backgrounds/*.png.import
+.fonts/*.ttf.import
+.glasses/*.png.import
+icon.svg.import
 
 # Godot-specific ignores
 .import/
